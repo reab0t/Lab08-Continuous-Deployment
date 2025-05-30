@@ -1,5 +1,8 @@
 name: deploy on push
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   deploy-app:
     runs-on: ubuntu-latest
@@ -7,13 +10,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_PAT }}  # 使用新的 PAT 权限
-
-      - name: Deploy to server
+          token: ${{ secrets.GH_PAT }}
+      - name: copy file to server
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USER_NAME }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{secrets.HOST}}
+          username: ${{secrets.SSH_USER_NAME}}
+          port: ${{secrets.SSH_PORT}}
+          key: ${{secrets.SSH_KEY}}
           source: "./html/*"
           target: "/var/www/html"
+          strip_components: 1

@@ -1,11 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Jin Lei</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人资料</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- 配置 Tailwind 自定义颜色 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#4080FF',
+                        neutral: '#F5F7FA',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>你的姓名</h1>
-    <p>这是我的第一个自动部署网页</p>
+<body class="bg-neutral font-inter min-h-screen flex items-center justify-center p-4">
+<div class="container max-w-2xl mx-auto">
+    <!-- 个人资料卡片 -->
+    <div class="profile-card bg-white rounded-2xl overflow-hidden card-shadow transition-all duration-300 hover:scale-[1.02] hover:card-shadow/70">
+        <!-- 卡片头部 -->
+        <div class="bg-gradient-to-r from-primary to-secondary h-32 relative">
+            <div class="absolute inset-0 bg-black/20"></div>
+        </div>
+
+        <!-- 个人信息区域 -->
+        <div class="p-6 -mt-16">
+            <!-- 个人头像 -->
+            <div class="flex justify-center">
+                <img
+                        src="https://picsum.photos/200/200?random=1"
+                        alt="Jin Lei 个人照片"
+                        class="profile-image w-32 h-32 rounded-full border-4 border-white object-cover shadow-lg"
+                >
+            </div>
+
+            <!-- 个人信息 -->
+            <div class="text-center mt-4">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 text-shadow">Jin Lei</h2>
+                <p class="text-gray-600 mt-1 text-lg">20222102</p>
+
+                <!-- 信息列表 -->
+                <div class="mt-6 space-y-3">
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa fa-university text-primary"></i>
+                        <span><strong>大学(university):</strong> North Minzu University</span>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa fa-building text-primary"></i>
+                        <span><strong>学院:</strong> 计算机科学与技术学院</span>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa fa-graduation-cap text-primary"></i>
+                        <span><strong>专业:</strong> 软件工程</span>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa fa-envelope text-primary"></i>
+                        <span><strong>邮箱(email):</strong> 15560674459@163.com</span>
+                    </div>
+                </div>
+
+                <!-- 社交链接 -->
+                <div class="mt-6 flex justify-center gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                        <i class="fa fa-github"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加简单动画效果 -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 卡片加载动画
+        const profileCard = document.querySelector('.profile-card');
+        profileCard.classList.add('opacity-0', 'translate-y-8');
+
+        setTimeout(() => {
+            profileCard.classList.remove('opacity-0', 'translate-y-8');
+            profileCard.classList.add('opacity-100', 'translate-y-0');
+        }, 100);
+
+        // 信息项悬停效果
+        const infoItems = document.querySelectorAll('.flex.items-center.justify-center.gap-2');
+        infoItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.classList.add('scale-105');
+                item.querySelector('i').classList.add('scale-125');
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('scale-105');
+                item.querySelector('i').classList.remove('scale-125');
+            });
+        });
+    });
+</script>
 </body>
 </html>
